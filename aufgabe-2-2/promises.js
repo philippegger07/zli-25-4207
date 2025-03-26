@@ -2,8 +2,16 @@
 const fs = require('node:fs');
 
 function leseDateiInhalt(filepath) {
-    return fs.readFile(filepath, 'utf8');
-  }
+  return new Promise((resolve, reject) => {
+    fs.readFile(filepath, 'utf8', (err, data) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(data);
+      }
+    });
+  });
+}
 
 
 leseDateiInhalt('beispiel.txt')
